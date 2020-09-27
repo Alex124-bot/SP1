@@ -250,7 +250,7 @@ class Game
     //Insert player
     board[player.getX()][player.getY()] = 1;
     //Insert play 2
-    board[player2.getX()][player2ssss.getY()] = 4;
+    board[player2.getX()][player2.getY()] = 4;
     //Insert enemies
     for(int i = 0; i < enemies.length; ++i)
     {
