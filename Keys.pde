@@ -73,23 +73,23 @@ class Keys
     }
   /*else if(code == UP) // added codes for player 2s' movement keys
     {
-      UP = true;
+      upDown = true;
     }
     else if (code == LEFT)
     {
-      LEFT = true;
+      leftDown = true;
     }
     else if(code == DOWN)
     {
-      DOWN = true;
+      downDown = true;
     }
     else if(code == RIGHT)
     {
-      RIGHT = true;
+      rightDown = true;
     }*/
   }
   
-  void onKeyReleased(char ch, boolean code)
+  void onKeyReleased(char ch/*, boolean code*/)
   {
     if(ch == 'W' || ch == 'w')
     {
@@ -107,7 +107,7 @@ class Keys
     {
       dDown = false;
     }
-    else if(code == UP) // added codes for player 2s' movement keys
+    /*else if(code == UP) // added codes for player 2s' movement keys
     {
       UP = false;
     }
@@ -122,6 +122,6 @@ class Keys
     else if(code == RIGHT)
     {
       RIGHT = false;
-    }
+    }*/
   }
 }

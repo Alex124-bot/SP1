@@ -126,24 +126,24 @@ class Game
     }  
   }
     
-  private void updatePlayer2()
+  /*private void updatePlayer2()
   {
     //Update player2 
     if(keys.UP() && !keys.DOWN())
     {
-      player.moveUp();
+      player2.moveUp();
     }
     if(keys.LEFT() && !keys.RIGHT())
     {
-      player.moveLeft();
+      player2.moveLeft();
     }
     if(keys.DOWN() && !keys.UP())
     {
-      player.moveDown();
+      player2.moveDown();
     }
     if(keys.RIGHT() && !keys.LEFT())
     {
-      player.moveRight();
+      player2.moveRight();
     }
   }*/
   
@@ -219,34 +219,6 @@ class Game
       //2 out of 3 we will escape..
       if(rnd.nextInt(3) < 2)
       {
-        //We escape
-        int dx = player.getX() - food[i].getX();
-        int dy = player.getY() - food[i].getY();
-        if(abs(dx) > abs(dy))
-        {
-          if(dx > 0)
-          {
-            //Player is to the right
-            food[i].moveLeft();   //food moves opposite of player
-          }
-          else
-          {
-            //Player is to the left
-            food[i].moveRight();
-          }
-        }
-        else if(dy > 0)
-        {
-          //Player is down;
-          food[i].moveUp();
-        }
-        else
-        {//Player is up;
-          food[i].moveDown();
-        }
-      }
-      else
-      {
         //We move randomly
         int move = rnd.nextInt(4);
         if(move == 0)
@@ -277,6 +249,8 @@ class Game
   {
     //Insert player
     board[player.getX()][player.getY()] = 1;
+    //Insert play 2
+    board[player2.getX()][player2ssss.getY()] = 4;
     //Insert enemies
     for(int i = 0; i < enemies.length; ++i)
     {

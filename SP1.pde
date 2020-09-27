@@ -9,7 +9,7 @@
  
 import java.util.Random;
 
-Game game = new Game(30, 20, 2, 2);
+Game game = new Game(30, 20, 1, 1);
 PFont font;
 
 public void settings() {
@@ -61,6 +61,10 @@ void draw()
       else if(board[x][y] == 3)
       {
         fill(0,255,0);
+      }
+      else if(board[x][y] == 4)
+      {
+        fill(255,255,0);
       }
       stroke(100,100,100);
       rect(x*40, y*40, 40, 40);
