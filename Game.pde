@@ -8,6 +8,7 @@ class Game
   private int[][] board;
   private Keys keys;
   private int playerLife;
+  private int player2Life;
   private Dot player;
   private Dot player2;
   private Dot[] enemies;
@@ -22,7 +23,7 @@ class Game
     }
     if(numberOfEnemies < 0)
     {
-      throw new IllegalArgumentException("Number of enemies must be positive"); // muligvis throw an exception for to litlle food
+      throw new IllegalArgumentException("Number of enemies must be positive"); // muligvis throw an exception for to litle food
     } 
     this.rnd = new Random();
     this.board = new int[width][height];
@@ -43,6 +44,7 @@ class Game
     }  
     
     this.playerLife = 100;
+    this.player2Life = 100;
     
   }
   
@@ -57,6 +59,11 @@ class Game
   }
   
   public int getPlayerLife()
+  {
+    return playerLife;
+  }
+  
+  public int getPlayer2Life()
   {
     return playerLife;
   }
@@ -126,7 +133,7 @@ class Game
     }  
   }
     
-  /*private void updatePlayer2()
+ /* private void updatePlayer2()
   {
     //Update player2 
     if(keys.UP() && !keys.DOWN())
