@@ -9,6 +9,8 @@ class Game
   private Keys keys;
   private int playerLife;
   private int player2Life;
+  private int playerPoints;
+  private int player2Points;
   private Dot player;
   private Dot player2;
   private Dot[] enemies;
@@ -23,8 +25,13 @@ class Game
     }
     if(numberOfEnemies < 0)
     {
-      throw new IllegalArgumentException("Number of enemies must be positive"); // muligvis throw an exception for to litle food
-    } 
+      throw new IllegalArgumentException("Number of enemies must be positive"); 
+    }
+    if(numberOfFood < 0)
+    {
+      throw new IllegalArgumentException("Number of food must be positive"); // muligvis throw an exception for to litle food
+    }
+    
     this.rnd = new Random();
     this.board = new int[width][height];
     this.width = width;
@@ -45,6 +52,8 @@ class Game
     
     this.playerLife = 100;
     this.player2Life = 100;
+    this.playerPoints = 0;
+    this.player2Points = 0;
     
   }
   
@@ -65,7 +74,17 @@ class Game
   
   public int getPlayer2Life()
   {
-    return playerLife;
+    return player2Life;
+  }
+  
+  public int getPlayerPoints()
+  {
+    return playerPoints;
+  }
+  
+  public int getPlayer2Points()
+  {
+    return player2Points;
   }
   
   public void onKeyPressed(char ch)
@@ -81,7 +100,7 @@ class Game
   public void update()
   {
     updatePlayer();
-    //updatePlayer2();
+    updatePlayer2();
     updateEnemies();
     updateFood();
     checkForCollisions();
@@ -133,7 +152,7 @@ class Game
     }  
   }
     
- /* private void updatePlayer2()
+  private void updatePlayer2()
   {
     //Update player2 
     if(keys.UP() && !keys.DOWN())
@@ -152,7 +171,7 @@ class Game
     {
       player2.moveRight();
     }
-  }*/
+  }
   
   private void updateEnemies()
   {
@@ -164,7 +183,7 @@ class Game
       {
         //We follow
         int dx = player.getX() - enemies[i].getX();
-        int dy = player.getY() - enemies[i].getY();
+        int dy = player2.getY() - enemies[i].getY();
         if(abs(dx) > abs(dy))
         {
           if(dx > 0)
@@ -270,8 +289,7 @@ class Game
     }
   }
    
-  private void checkForCollisions() /* here I'll try and make colision for player 2 
-  as well as there is for player.*/
+  private void checkForCollisions() 
   {
     //Check enemy collisions
     for(int i = 0; i < enemies.length; ++i)
@@ -282,13 +300,40 @@ class Game
         --playerLife;
       }
     }
-   //Check food collisions
+    for(int i = 0; i < enemies.length; ++i)
+    {
+      if(enemies[i].getX() == player2.getX() && enemies[i].getY() == player2.getY())
+      {
+        //We have a collision
+        --player2Life;
+        if(player2Life < 1)
+        {
+          fill(255);
+          text("Player wins by surviving: ", width/2,height/2); 
+        }
+      }
+    }
+   //Check food collisions for player
     for(int i = 0; i < food.length; ++i)
     {
       if(food[i].getX() == player.getX() && food[i].getY() == player.getY())
       {
         //We have a collision
-        ++playerLife;
+        ++playerPoints;
+      }
+    } 
+    //Check food collisions for player2 
+    for(int i = 0; i < food.length; ++i)
+    {
+      if(food[i].getX() == player2.getX() && food[i].getY() == player2.getY())
+      {
+        //We have a collision
+        ++player2Points;    // playerpoints for player2
+        if(player2Points >= 1)
+        {
+          fill(255);
+          text("Player 2 wins in points: ", width/2,height/2); 
+        }
       }
     } 
   }

@@ -71,5 +71,12 @@ void draw()
     }
   }
   fill(255);
-  text("Lifes: "+game.getPlayerLife(), 25,25); // playerlife for player 2
+  text("Lifes: "+game.getPlayerLife(), 25,25); // playerlife for player
+  fill(255);
+  text("Points: "+game.getPlayerPoints(), 100,25); // playerpoints for player
+  fill(255);
+  text("Lifes: "+game.getPlayer2Life(), width-100,25);// playerlife for player 2
+  fill(255);
+  text("Points: "+game.getPlayer2Points(), width-200,25); // playerpoints for player 2
+  fill(255);
 }

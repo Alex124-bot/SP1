@@ -4,10 +4,10 @@ class Keys
   private boolean aDown = false;
   private boolean sDown = false;
   private boolean dDown = false;
-  private boolean UP = false; // added boolean for player 2 (arrowkeys)
-  private boolean LEFT = false;
-  private boolean DOWN = false;
-  private boolean RIGHT = false;
+  private boolean upDown = false; // added boolean for player 2 (arrowkeys)
+  private boolean leftDown = false;
+  private boolean downDown = false;
+  private boolean rightDown = false;
   
   public Keys(){}
   
@@ -31,29 +31,29 @@ class Keys
     return dDown;
   }
   
-  /*public boolean UP()
+  public boolean UP()
   {
-    return UP;
+    return upDown;
   }
   
   public boolean LEFT()
   {
-    return LEFT;
+    return leftDown;
   }
   
   public boolean DOWN()
   {
-    return DOWN;
+    return downDown;
   }
   
   public boolean RIGHT()
   {
-    return RIGHT;
+    return rightDown;
   }
-  */
   
   
-  void onKeyPressed(char ch/*, int code*/)
+  
+  void onKeyPressed(char ch)
   {
     if(ch == 'W' || ch == 'w')
     {
@@ -71,22 +71,22 @@ class Keys
     {
       dDown = true;
     }
-  /*else if(code == UP) // added codes for player 2s' movement keys
+    else if(keyCode == UP) // added codes for player 2s' movement keys
     {
       upDown = true;
     }
-    else if (code == LEFT)
+    else if (keyCode == LEFT)
     {
       leftDown = true;
     }
-    else if(code == DOWN)
+    else if(keyCode == DOWN)
     {
       downDown = true;
     }
-    else if(code == RIGHT)
+    else if(keyCode == RIGHT)
     {
       rightDown = true;
-    }*/
+    }
   }
   
   void onKeyReleased(char ch/*, boolean code*/)
@@ -107,21 +107,21 @@ class Keys
     {
       dDown = false;
     }
-    /*else if(code == UP) // added codes for player 2s' movement keys
+    else if(keyCode == UP) // added codes for player 2s' movement keys
     {
-      UP = false;
+      upDown = false;
     }
-    else if (code == LEFT)
+    else if (keyCode == LEFT)
     {
-      LEFT = false;
+      leftDown = false;
     }
-    else if(code == DOWN)
+    else if(keyCode == DOWN)
     {
-      DOWN = false;
+      downDown = false;
     }
-    else if(code == RIGHT)
+    else if(keyCode == RIGHT)
     {
-      RIGHT = false;
-    }*/
+      rightDown = false;
+    }
   }
 }
