@@ -11,6 +11,9 @@ class Game
   private int player2Life;
   private int playerPoints;
   private int player2Points;
+  private int winScore = 10;
+  private color colorL = color(0,0,255);
+  private color colorR = color(255,255,0);
   private Dot player;
   private Dot player2;
   private Dot[] enemies;
@@ -50,8 +53,8 @@ class Game
       food[i] = new Dot(0, height-1, width-1, height-1);
     }  
     
-    this.playerLife = 100;
-    this.player2Life = 100;
+    this.playerLife = 10;
+    this.player2Life = 10;
     this.playerPoints = 0;
     this.player2Points = 0;
     
@@ -106,6 +109,7 @@ class Game
     checkForCollisions();
     clearBoard();
     populateBoard();
+    gameOver();
   }
   
   
@@ -175,61 +179,92 @@ class Game
   
   private void updateEnemies()
   {
-    for(int i = 0; i < enemies.length; ++i)
+    for(int i = 0; i < enemies.length;++i)
     {
       //Should we follow or move randomly?
       //2 out of 3 we will follow..
       if(rnd.nextInt(3) < 2)
       {
-        //We follow
-        int dx = player.getX() - enemies[i].getX();
-        int dy = player2.getY() - enemies[i].getY();
-        if(abs(dx) > abs(dy))
+        if (i % 2 != 0)
         {
-          if(dx > 0)
+          //We follow
+          int dx = player.getX() - enemies[i].getX();
+          int dy = player.getY() - enemies[i].getY();
+          if(abs(dx) > abs(dy))
           {
-            //Player is to the right
-            enemies[i].moveRight();
+            if(dx > 0)
+            {
+              //Player is to the right
+              enemies[i].moveRight();
+            }
+            else
+            {
+              //Player is to the left
+              enemies[i].moveLeft();
+            }
+          }
+          else if(dy > 0)
+          {
+            //Player is down;
+            enemies[i].moveDown();
           }
           else
-          {
-            //Player is to the left
-            enemies[i].moveLeft();
+          {//Player is up;
+            enemies[i].moveUp();
           }
         }
-        else if(dy > 0)
+        if (i % 2 == 0)
         {
-          //Player is down;
-          enemies[i].moveDown();
+          //We follow
+          int dx = player2.getX() - enemies[i].getX();
+          int dy = player2.getY() - enemies[i].getY();
+          if(abs(dx) > abs(dy))
+          {
+            if(dx > 0)
+            {
+              //Player2 is to the right
+              enemies[i].moveRight();
+            }
+            else
+            {
+              //Player2 is to the left
+              enemies[i].moveLeft();
+            }
+          }
+          else if(dy > 0)
+          {
+            //Player2 is down;
+            enemies[i].moveDown();
+          }
+          else
+          {//Player2 is up;
+            enemies[i].moveUp();
+          }
         }
         else
-        {//Player is up;
-          enemies[i].moveUp();
-        }
-      }
-      else
-      {
-        //We move randomly
-        int move = rnd.nextInt(4);
-        if(move == 0)
         {
-          //Move right
-          enemies[i].moveRight();
-        }
-        else if(move == 1)
-        {
-          //Move left
-          enemies[i].moveLeft();
-        }
-        else if(move == 2)
-        {
-          //Move up
-          enemies[i].moveUp();
-        }
-        else if(move == 3)
-        {
-          //Move down
-          enemies[i].moveDown();
+          //We move randomly
+          int move = rnd.nextInt(4);
+          if(move == 0)
+          {
+            //Move right
+            enemies[i].moveRight();
+          }
+          else if(move == 1)
+          {
+            //Move left
+            enemies[i].moveLeft();
+          }
+          else if(move == 2)
+          {
+            //Move up
+            enemies[i].moveUp();
+          }
+          else if(move == 3)
+          {
+            //Move down
+            enemies[i].moveDown();
+          }
         }
       }
     }
@@ -297,7 +332,12 @@ class Game
       if(enemies[i].getX() == player.getX() && enemies[i].getY() == player.getY())
       {
         //We have a collision
-        --playerLife;
+        --playerLife;           // playerlife for player
+        if(getPlayerLife() < 1)
+        {
+          fill(255);
+          text("Player2 wins by surviving: ", width/2,height/2); 
+        }
       }
     }
     for(int i = 0; i < enemies.length; ++i)
@@ -305,7 +345,7 @@ class Game
       if(enemies[i].getX() == player2.getX() && enemies[i].getY() == player2.getY())
       {
         //We have a collision
-        --player2Life;
+        --player2Life;        // playerlife for player 2
         if(player2Life < 1)
         {
           fill(255);
@@ -319,7 +359,12 @@ class Game
       if(food[i].getX() == player.getX() && food[i].getY() == player.getY())
       {
         //We have a collision
-        ++playerPoints;
+        ++playerPoints;      // playerpoints for player
+        if(playerPoints > 10)
+        {
+          fill(255);
+          text("Player wins by points: ", width/2,height/2);
+        }
       }
     } 
     //Check food collisions for player2 
@@ -328,13 +373,34 @@ class Game
       if(food[i].getX() == player2.getX() && food[i].getY() == player2.getY())
       {
         //We have a collision
-        ++player2Points;    // playerpoints for player2
-        if(player2Points >= 1)
+        ++player2Points;    // playerpoints for player 2
+        if(player2Points > 10)
         {
           fill(255);
-          text("Player 2 wins in points: ", width/2,height/2); 
+          text("Player 2 wins by points: ", width/2,height/2); 
         }
       }
     } 
   }
-}
+  
+  private void gameOver()
+  {
+    if(playerPoints == winScore)
+    {
+      gameOverPage("Blue wins!");
+      }
+      if(player2Points == winScore)
+      {
+      gameOverPage("Yellow wins!");
+      }
+    }
+  }
+
+  void gameOverPage(String text)
+  {
+  fill(255);
+  text("Game over",width/2,height/3-40);
+  text("Click to play again", width/2,height/2+40);
+  fill(0);
+  text(text,width/2,height/3);
+  }
