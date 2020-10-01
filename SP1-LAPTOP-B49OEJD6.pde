@@ -1,5 +1,3 @@
-PImage startscreen;
-
 /**
  * Array 2D. 
  * 
@@ -11,9 +9,8 @@ PImage startscreen;
  
 import java.util.Random;
 
-Game game = new Game(30, 20, 2, 2);
+Game game = new Game(30, 20, 1, 1);
 PFont font;
-private boolean gameHasStarted = false;
 
 public void settings() {
   size(1201, 801);
@@ -24,7 +21,6 @@ void setup()
   frameRate(10);
   font = createFont("Arial", 16, true);
   textFont(font, 16);
-  startscreen = loadImage("sylvester.jpg");
 }
 
 void keyReleased()
@@ -34,29 +30,12 @@ void keyReleased()
 
 void keyPressed()
 {
-  fill(255);
-  textFont(font,10);
-  gameHasStarted = true;
   game.onKeyPressed(key);
 }
 
 void draw()
 {
-   if (!gameHasStarted)
-  {
-    image(startscreen, 0, 0);
-    startscreen.resize(width,0);
-    textAlign(CENTER);
-    text("sylvester", width / 2, (height / 3));
-    text("Press any key to start game", width / 2, height / 2);
-    
-  } else
-  {
-     background(0); //Black
-    if (!game.getGameIsOver())
-    {
-    game.update();
-    }
+  game.update();
   background(0); //Black
   // This embedded loop skips over values in the arrays based on
   // the spacer variable, so there are more values in the array
@@ -92,17 +71,11 @@ void draw()
     }
   }
   fill(255);
-  text("Lifes: "+game.getPlayerLife(), 25,25); // playerlife for player
+  text("Lifes: "+game.getPlayerLife(), 25,25);
   fill(255);
-  text("Points: "+game.getPlayerPoints(), 100,25); // playerpoints for player
+  text("Points: "+game.getPlayerPoints(), 100,25); // playerpoints
   fill(255);
   text("Lifes: "+game.getPlayer2Life(), width-100,25);// playerlife for player 2
   fill(255);
   text("Points: "+game.getPlayer2Points(), width-200,25); // playerpoints for player 2
-  fill(255);
-    }
-  if (game.getGameIsOver())
-  {
-    text(game.getWinnerName() + "wins!", width / 2, height / 2);
-  }
 }

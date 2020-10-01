@@ -23,6 +23,13 @@ class Dot
     return y;
   }
   
+  public void setRandomPosition()
+  {
+    //random x & y
+    this.x = int(random(maxX));
+    this.y = int(random(maxY));
+  }
+  
   public void moveLeft()
   {
     --x;
