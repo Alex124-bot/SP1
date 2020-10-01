@@ -46,7 +46,7 @@ class Game
     food = new Dot[numberOfFood];
     for(int i = 0; i < numberOfEnemies; ++i)
     {
-      enemies[i] = new Dot(width-1, height-1, width-1, height-1);
+      enemies[i] = new Dot(width/2, height-1, width-1, height-1);
     }
     for(int i = 0; i < numberOfFood; ++i)
     {
@@ -386,7 +386,7 @@ class Game
   {
     //Insert player
     board[player.getX()][player.getY()] = 1;
-    //Insert play 2
+    //Insert player 2
     board[player2.getX()][player2.getY()] = 4;
     //Insert enemies
     for(int i = 0; i < enemies.length; ++i)

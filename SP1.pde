@@ -1,4 +1,4 @@
-PImage startscreen;
+PImage startscreen, megaman, mario, sonic, zelda;
 import processing.sound.*;
 SoundFile file;
 
@@ -32,6 +32,10 @@ void setup()
   file.play();
   file.amp(0.1);
   startscreen = loadImage("Press-any-key-to-continue.png");
+  megaman = loadImage("megaman.png");
+  mario = loadImage("mario.jpg");
+  sonic = loadImage("sonic.jpg");
+  zelda = loadImage("zelda.jpg");
 }
 
 void keyReleased()
@@ -77,25 +81,27 @@ void draw()
       if(board[x][y] == 0)
       {
         fill(0,0,0);
+        stroke(100,100,100);
+        rect(x*40, y*40, 40, 40);        
       }
       else if(board[x][y] == 1)
       {
-        fill(0,0,255);
+        image(megaman,x*40,y*40); 
       }
       else if(board[x][y] == 2)
       {
-        fill(255,0,0);
+        image(mario,x*40,y*40); 
       }
       else if(board[x][y] == 3)
       {
-        fill(0,255,0);
+        image(zelda,x*40,y*40); 
       }
       else if(board[x][y] == 4)
       {
-        fill(255,255,0);
+        image(sonic,x*40,y*40);
       }
-      stroke(100,100,100);
-      rect(x*40, y*40, 40, 40);
+      //stroke(100,100,100);
+      //rect(x*40, y*40, 40, 40);
     }
   }
   fill(255);
