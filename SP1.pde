@@ -1,4 +1,6 @@
 PImage startscreen;
+import processing.sound.*;
+SoundFile file;
 
 /**
  * Array 2D. 
@@ -11,7 +13,7 @@ PImage startscreen;
  
 import java.util.Random;
 
-Game game = new Game(30, 20, 2, 2);
+Game game = new Game(30, 20, 6, 2);
 PFont font;
 private boolean gameHasStarted = false;
 
@@ -24,10 +26,12 @@ void setup()
   frameRate(10);
   font = createFont("Arial", 16, true);
   textFont(font, 16);
+  
   // Load a soundfile from the /data folder of the sketch and play it back
-  file = new SoundFile(this, "Coldplay-A-Sky-Full-Of-Stars-Official-Video.mp3");
+  file = new SoundFile(this, "Boss_1_-_Famitracker[Youtubemp3.download].mp3");
   file.play();
-  startscreen = loadImage("sylvester.jpg");
+  file.amp(0.1);
+  startscreen = loadImage("Press-any-key-to-continue.png");
 }
 
 void keyReleased()
@@ -47,12 +51,12 @@ void draw()
 {
    if (!gameHasStarted)
   {
-    image(startscreen, 0, 0);
+    image(startscreen, 0, height/2-170);
     startscreen.resize(width,0);
-    textAlign(CENTER);
-    text("sylvester", width / 2, (height / 3));
-    text("Press any key to start game", width / 2, height / 2);
-    
+    /*textAlign(CENTER);
+    fill(255,0,0);
+    text("SP1: Gridbased game\nPress any key to start game", width / 2, height / 2-178);
+    */
   } else
   {
      background(0); //Black
