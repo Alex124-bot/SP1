@@ -24,6 +24,9 @@ void setup()
   frameRate(10);
   font = createFont("Arial", 16, true);
   textFont(font, 16);
+  // Load a soundfile from the /data folder of the sketch and play it back
+  file = new SoundFile(this, "Coldplay-A-Sky-Full-Of-Stars-Official-Video.mp3");
+  file.play();
   startscreen = loadImage("sylvester.jpg");
 }
 
