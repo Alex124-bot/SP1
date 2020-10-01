@@ -1,4 +1,4 @@
-PImage startscreen, megaman, mario, sonic, zelda;
+PImage startscreen, megaman, mario, sonic, zelda, gameover;
 import processing.sound.*;
 SoundFile file;
 
@@ -36,6 +36,7 @@ void setup()
   mario = loadImage("mario.jpg");
   sonic = loadImage("sonic.jpg");
   zelda = loadImage("zelda.jpg");
+  gameover = loadImage("gameover.jpg");
 }
 
 void keyReleased()
@@ -116,6 +117,9 @@ void draw()
     }
   if (game.getGameIsOver())
   {
-    text(game.getWinnerName() + "wins!", width / 2, height / 2);
+    image(gameover, 0, 0,width,height);
+    textMode(CENTER);
+    textSize(50);
+    text(game.getWinnerName() + "wins!", width / 2-145, height / 2-200);
   }
 }
